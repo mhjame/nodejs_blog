@@ -1,6 +1,9 @@
 const express = require('express') // gọi/ nạp thư viện express
+var morgan = require('morgan')
 const app = express() // app is an instance of express. express() - lời gọi hàm
 const port = 3000 // run app ở cổng nào
+
+app.use(morgan('combined'))
 
 // app.get (định nghĩa route)
 // get ('/') khi gõ vào chrome / máy sẽ chạy cái server này
