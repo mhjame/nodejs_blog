@@ -26,7 +26,7 @@ app.set('views', path.join(__dirname, 'resources\\views'));
 // get ('/') khi gõ vào chrome / máy sẽ chạy cái server này
 // get('/tin-tuc) khi gõ vào chrome tintuc thì mới nhận
 
-app.get('/trang-chu', (req, res) => {
+app.get('/trang-chu-1', (req, res) => {
     res.render('home');
 })
 
@@ -36,6 +36,11 @@ app.get('/trang-chu', (req, res) => {
  *      return res.send('Hello World!')
  * }
  */
+
+app.get('/new', (req, res) => {
+    res.render('new');
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 })
