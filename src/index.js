@@ -12,8 +12,10 @@ app.use(morgan('combined'));
 
 // Template engine
 // Register `hbs.engine` with the Express app.
-app.engine('handlebars', handlebars.engine());
-app.set('view engine', 'handlebars');
+app.engine('hbs', handlebars.engine({
+    extname: '.hbs'
+}));
+app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources\\views'));
 
 //console.log('Path: ', path.join(__dirname, 'resources\\views'));
