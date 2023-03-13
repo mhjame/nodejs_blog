@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const app = express() // app is an instance of express. express() - lời gọi hàm
 const port = 3000 // run app ở cổng nào
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // HTTP Logger
 app.use(morgan('combined'));
 
