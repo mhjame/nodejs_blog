@@ -1,4 +1,9 @@
-.test {
-    font-size: large;
-    background-color: bisque;
+.app {
+    color: blue($color: #000000);
+    font: bold;
+    font: italic;
+}
+
+body {
+    color: rgb(231, 111, 26);
 }
