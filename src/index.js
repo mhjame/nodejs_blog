@@ -43,6 +43,16 @@ app.get('/trang-chu-1', (req, res) => {
 
 app.get('/new', (req, res) => {
     res.render('new');
+    // req: chứa những thông tin gửi lên
+    // response dùng để tùy chỉnh kết quả trả về
+})
+
+app.get('/search', (req, res) => {
+    console.log(req.query);
+    console.log(req.query.q);
+    res.render('search');
+    // req: chứa những thông tin gửi lên
+    // response dùng để tùy chỉnh kết quả trả về
 })
 
 app.listen(port, () => {
