@@ -55,6 +55,11 @@ app.get('/search', (req, res) => {
     // response dùng để tùy chỉnh kết quả trả về
 })
 
+app.post('/search', (req, res) => {
+    console.log('post thành công');
+    res.render('search');
+})
+
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
 })
