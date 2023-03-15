@@ -9,6 +9,11 @@ const port = 3000 // run app ở cổng nào
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.urlencoded({
+    extended: true
+})); // xử lý gửi dữ liệu import middleware để sử dụng
+app.use(express.json()); // gửi từ code js thì có js để xử lý
+
 // HTTP Logger
 app.use(morgan('combined'));
 
@@ -57,6 +62,7 @@ app.get('/search', (req, res) => {
 
 app.post('/search', (req, res) => {
     console.log('post thành công');
+    console.log(req.body);
     res.render('search');
 })
 
