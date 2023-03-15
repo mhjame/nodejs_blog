@@ -1,5 +1,4 @@
 class SiteController {
-
     //GET / new
     index(req, res) {
         res.render('home');
@@ -8,8 +7,8 @@ class SiteController {
     // [GET]/ new /:slug
 
     search(req, res) {
-        res.send('SEARCH')
+        res.send('SEARCH');
     }
 }
 
-module.exports = new SiteController;
+module.exports = new SiteController();

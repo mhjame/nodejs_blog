@@ -11,5 +11,4 @@ router.use('/:slug', siteController.search);
 router.use('/chitiet', siteController.index);
 router.use('/', siteController.index);
 
-
 module.exports = router;
