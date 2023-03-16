@@ -7,6 +7,12 @@ const app = express(); // app is an instance of express. express() - lời gọi
 const port = 3000; // run app ở cổng nào
 
 const route = require('./routes');
+const db = require('./config/db');
+
+
+//Connect to DB
+db.connect();
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(

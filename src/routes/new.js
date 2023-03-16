@@ -13,3 +13,4 @@ router.use('/', newController.index);
 console.log('chay vao new.js');
 
 module.exports = router;
+//chạy thử husky
