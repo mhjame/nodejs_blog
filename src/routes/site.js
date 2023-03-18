@@ -6,9 +6,9 @@ module.exports = router;
 //newController.index
 const siteController = require('../app/controllers/SiteController');
 
-router.use('/trang-chu-1', siteController.index);
-router.use('/:slug', siteController.search);
-router.use('/chitiet', siteController.index);
-router.use('/', siteController.index);
+router.get('/trang-chu-1', siteController.index);
+router.get('/:slug', siteController.search);
+router.get('/chitiet', siteController.index);
+router.get('/', siteController.index);
 
 module.exports = router;
