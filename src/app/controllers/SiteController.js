@@ -1,14 +1,14 @@
 const Course = require('./models/Course'); // import model
-
+const { multipleMongooseToObject } = require('../../util/mongoose')
 class SiteController {
     //GET / new
     async index(req, res, next) {
 
         Course.find({})
             .then(courses => {
-
-                courses = courses.map(course => course.toObject())
-                res.render('home', { courses }) // truyen courses sang home.hdb
+                res.render('home', {
+                        courses: multipleMongooseToObject(courses)
+                    }) // truyen courses sang home.hdb
             })
             .catch(error => next(error));
 
