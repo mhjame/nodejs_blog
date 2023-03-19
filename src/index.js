@@ -2,7 +2,7 @@ const path = require('path');
 const express = require('express'); // gọi/ nạp thư viện express
 const handlebars = require('express-handlebars');
 const morgan = require('morgan');
-
+const methodOverride = require('method-override')
 const app = express(); // app is an instance of express. express() - lời gọi hàm
 const port = 3000; // run app ở cổng nào
 
@@ -22,6 +22,8 @@ app.use(
 ); // xử lý gửi dữ liệu import middleware để sử dụng
 app.use(express.json()); // gửi từ code js thì có js để xử lý
 
+app.use(methodOverride('_method'))
+
 // HTTP Logger
 app.use(morgan('combined'));
 
@@ -31,6 +33,9 @@ app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs',
+        helpers: {
+            sum: (a, b) => a + b, // tạo function cộng
+        }
     }),
 );
 app.set('view engine', 'hbs');

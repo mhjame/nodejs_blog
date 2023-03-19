@@ -37,6 +37,23 @@ class CourseController {
 
         //res.send('COURSE SAVE');
     }
+
+    //[GET] /courses/:id/edit
+    edit(req, res, next) {
+        //console.log('CHẠY VÀO COURSES EDIT')
+        Course.findById(req.params.id)
+            .then(course => res.render('courses/edit', {
+                course: mongooseToObject(course)
+            }))
+            .catch(next);
+    }
+
+    //PUT/ courses/:id 
+    update(req, res, next) {
+        Course.updateOne({ _id: req.params.id }, req.body)
+            .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();

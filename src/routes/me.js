@@ -3,11 +3,13 @@ const router = express.Router();
 
 module.exports = router;
 
+
 //newController.index
-const newController = require('../app/controllers/NewController');
+const meController = require('../app/controllers/MeController');
 
 //router.get('/:slug', newController.show);
-router.get('/:slug', newController.show);
+console.log('STORE');
+router.get('/stored/courses', meController.storedCourses);
 
 module.exports = router;
 //chạy thử husky
