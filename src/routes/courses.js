@@ -3,6 +3,7 @@ const router = express.Router();
 
 module.exports = router;
 
+
 //newController.index
 const courseController = require('../app/controllers/CourseController');
 

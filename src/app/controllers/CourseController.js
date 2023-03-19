@@ -1,5 +1,7 @@
 const Course = require('./models/Course'); // import model
 const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
+
+
 class CourseController {
     //GET / courses/:slug
 
@@ -25,9 +27,16 @@ class CourseController {
 
     //POST / courses/store
     store(req, res, next) {
-        res.json(req.body);
-    }
+        //res.json(req.body);
+        const formData = req.body;
+        formData.image = 'https://img.youtube.com/vi/${req.body.videoId}/sddefault.jpg';
+        const course = new Course(formData);
+        course.save()
+            .then(() => res.redirect('/')) // redirec trang
+            .catch(error => {})
 
+        //res.send('COURSE SAVE');
+    }
 }
 
 module.exports = new CourseController();
