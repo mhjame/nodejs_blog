@@ -13,6 +13,21 @@ class CourseController {
             })
             .catch(next);
     }
+
+    //GET / courses/create
+
+    create(req, res, next) {
+        // console.log(req.params.slug) // in thử slug được lấy ra từ request
+        //res.send('COURSE DETAIL - ' + req.params.slug);
+
+        res.render('courses/create');
+    }
+
+    //POST / courses/store
+    store(req, res, next) {
+        res.json(req.body);
+    }
+
 }
 
 module.exports = new CourseController();
