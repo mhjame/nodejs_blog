@@ -4,13 +4,10 @@ const router = express.Router();
 module.exports = router;
 
 //newController.index
-const newController = require('../app/controllers/NewController');
+const courseController = require('../app/controllers/CourseController');
 
 //router.get('/:slug', newController.show);
-router.get('/chitiet', newController.index);
-router.get('/', newController.index);
-
-console.log('chay vao new.js');
+router.get('/:slug', courseController.show);
 
 module.exports = router;
 //chạy thử husky
