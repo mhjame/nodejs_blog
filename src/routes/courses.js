@@ -13,8 +13,10 @@ router.post('/store', courseController.store);
 router.get('/:id/edit', courseController.edit);
 router.patch('/:id/restore', courseController.restore);
 router.put('/:id', courseController.update);
-router.get('/:slug', courseController.show);
+
+router.delete('/:id/force', courseController.forceDestroy);
 router.delete('/:id', courseController.destroy);
+router.get('/:slug', courseController.show);
 
 module.exports = router;
 //chạy thử husky
