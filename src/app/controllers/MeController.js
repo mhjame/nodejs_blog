@@ -4,10 +4,20 @@ class MeController {
     //GET /stored/ me
 
     storedCourses(req, res, next) {
-        Course.find({ deleteAt: null }) // lấy ra các course có deleteAt = null
+        Course.find({}) // lấy ra các course có deleteAt = null
             .then(courses => res.render('me/stored-courses', {
                 courses: multipleMongooseToObject(courses)
             }))
+            .catch(next);
+    }
+
+    trashCourses(req, res, next) {
+        Course.findDeleted({})
+            .then((courses) =>
+                res.render('me/trash-courses', {
+                    courses: multipleMongooseToObject(courses)
+                }),
+            )
             .catch(next);
     }
 }

@@ -1,6 +1,7 @@
+
 <div class="mt-4">
-    <h3> Khóa học của tôi </h3>
-    <a href = "/me/trash/courses"> Thùng rác </a>
+    <h3> Khóa học đã xóa </h3>
+    <a href = "/me/stored/courses"> Danh sách khóa học </a>
 
     <table class="table">
         <thead>
@@ -21,16 +22,16 @@
                     <td> {{this.description}}</td>
                     <td> {{this.createdAt}}</td>
                     <td> 
-                        <a href="/courses/{{this._id}}/edit" class="btn btn-link">Sửa</button>
-                        <a href="/courses/{{this._id}}/edit" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal" data-id = "{{this._id}}">Xóa</button>
+                        <a href="" class="btn btn-link btn-restore" data-id = {{this._id}}> Khôi phục </button>
+                        <a href="/courses/{{this._id}}/edit" class="btn btn-link" data-toggle="modal" data-target="#delete-course-modal" data-id = "{{this._id}}">Xóa vĩnh viễn</button>
                     </td>
                 </tr>
 
                 {{else}}
                 <tr>
-                  <td colspan="5" class = "text-center">
-                    Bạn chưa đăng khóa học nào. 
-                    <a href = "/courses/create"> Đăng khóa học </a>
+                   <td colspan="5" class = "text-center">
+                        Thùng rác trống. 
+                    <a href = "/me/stored/courses"> Danh sách khóa học </a>
                   </td>
                 </tr>
             {{/each}}
@@ -61,9 +62,9 @@
   </div>
 </div>
 
-<!-- Delete hidden form -->
+<!-- Restore hidden form -->
 
-<form name = "delete-course-form" method="post">
+<form name = "restore-course-form" method="post">
    
 </form>
 
@@ -74,9 +75,11 @@
     // when dialog confirm clicked
     document.addEventListener('DOMContentLoaded', function() {
         var courseId;
-        var deleteForm = document.forms['delete-course-form'];
+        var restoreForm = document.forms['restore-course-form'];
         var btnDeleteCourse = document.getElementById('btn-delete-course');
+        var restoreBtn = $('.btn-restore');
 
+        console.log(restoreBtn);
         $('#delete-course-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var id = button.data('id'); // Extract info from data-* attributes
@@ -90,6 +93,16 @@
             deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
             deleteForm.submit();
         }
+
+        // restoreBtn click
+        restoreBtn.click(function(e) {
+            e.preventDefault();  // xóa bỏ hành vi mặc định của thẻ đang được click
+            var courseId = $(this).data('id');
+            //console.log($(this).data('id'));
+
+            restoreForm.action = '/courses/' + courseId + '/restore?_method=PATCH';
+            restoreForm.submit();
+        })
     });
     
 </script>

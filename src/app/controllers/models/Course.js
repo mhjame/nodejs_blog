@@ -1,9 +1,9 @@
 // Using Node.js `require()`
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
-
+const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
-mongoose.plugin(slug);
+
 
 // defining a model
 const Course = new Schema({
@@ -15,6 +15,12 @@ const Course = new Schema({
 }, {
     timestamps: true,
 });
+
+mongoose.plugin(slug);
+Course.plugin(mongooseDelete, {
+    deletedAt: true,
+    overrideMethods: 'all',
+}); // đối số thứ 2 override lại theo plugin
 
 // export a model
 module.exports = mongoose.model('Course', Course);

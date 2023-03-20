@@ -9,7 +9,7 @@ const meController = require('../app/controllers/MeController');
 
 //router.get('/:slug', newController.show);
 console.log('STORE');
+router.get('/trash/courses', meController.trashCourses);
 router.get('/stored/courses', meController.storedCourses);
-
 module.exports = router;
 //chạy thử husky
