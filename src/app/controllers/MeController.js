@@ -4,11 +4,29 @@ class MeController {
     //GET /stored/ me
 
     storedCourses(req, res, next) {
+
+        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+            .then(([courses, deletedCount]) =>
+                res.render('me/stored-courses', {
+                    deletedCount,
+                    courses: multipleMongooseToObject(courses)
+                })
+            )
+            .catch(next);
+
+        /* key: destructuring javascript
+
+        Course.countDocumentsDeleted()
+            .then((deletedCount) => {
+                console.log('deletedCount: ' + deletedCount);
+            })
+            .catch(() => {});
+
         Course.find({}) // lấy ra các course có deleteAt = null
             .then(courses => res.render('me/stored-courses', {
                 courses: multipleMongooseToObject(courses)
             }))
-            .catch(next);
+            .catch(next);*/
     }
 
     trashCourses(req, res, next) {
