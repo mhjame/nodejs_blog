@@ -24,6 +24,27 @@ app.use(express.json()); // gửi từ code js thì có js để xử lý
 
 app.use(methodOverride('_method'))
 
+
+app.get('/middleware',
+    function(req, res, next) {
+        if (['vethuong', 'vevip'].includes(req.query.ve)) {
+            req.face = 'Gach gach gach'; // chỉnh sửa
+            return next(); // đẩy sang middleware tiếp theo
+        } else {
+            res.status(403).json({
+                message: "Access denied"
+
+            });
+        }
+
+    },
+    function(req, res, next) {
+        res.json({
+            message: 'Successfully',
+            face: req.face
+        });
+    });
+
 // HTTP Logger
 app.use(morgan('combined'));
 
