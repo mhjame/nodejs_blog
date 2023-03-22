@@ -110,8 +110,9 @@
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name = "courseIds[]"]');
         var checkAllSubmitBtn = $('.check-all-submit-btn');
-        var containerForm = document.forms['container-form'];
-        
+       // var containerForm = document.forms['container-form'];
+        var containerForm = $('form[name="container-form"]');
+
         //console.log(containerForm);
         
         $('#delete-course-modal').on('show.bs.modal', function (event) {
@@ -164,8 +165,8 @@
 
         /*viết để có bắt buộc hành động*/
 
-        checkAllSubmitBtn.on('submit', function(e) { // lắng nghe hành vi submit mặc định của trình duyệt. Nếu submit
-          var isSubmittable = !$(this).hasClass('disabled');
+        containerForm.on('submit', function(e) { // lắng nghe hành vi submit mặc định của trình duyệt. Nếu submit
+          var isSubmittable = !checkAllSubmitBtn.hasClass('disabled');
           if(!isSubmittable) {
             e.preventDefault();
           }
