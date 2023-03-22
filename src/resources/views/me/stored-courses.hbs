@@ -23,7 +23,7 @@
           <option>5</option>
         </select>
 
-        <button class="btn btn-primary btn-sm disabled check-all-submit-btn">
+        <button class="btn btn-primary btn-sm check-all-submit-btn" disabled>
           Thực hiện
         </button>
     </div>
@@ -151,35 +151,15 @@
           checkboxAll.prop('checked', isCheckedAll_);
         });
 
-        //checkAllSubmitBtn clicked
-        /*
-        checkAllSubmitBtn.click(function(e) {
-          e.preventDefault();
-
-          var isSubmittable = !$(this).hasClass('disabled');
-          if(isSubmittable) {
-            containerForm.submit();
-          }
-
-        })*/
-
-        /*viết để có bắt buộc hành động*/
-
-        containerForm.on('submit', function(e) { // lắng nghe hành vi submit mặc định của trình duyệt. Nếu submit
-          var isSubmittable = !checkAllSubmitBtn.hasClass('disabled');
-          if(!isSubmittable) {
-            e.preventDefault();
-          }
-        })
-
+        
         // rerender check all submit button
         courseItemCheckbox.change(function(){
           var checkedCount = $('input[name="courseIds[]"]:checked').length;
-          if(checkedCount) {
-              checkAllSubmitBtn.removeClass('disabled');
+          if(checkedCount > 0) {
+              checkAllSubmitBtn.attr('disabled', false);
           }
           else {
-            checkAllSubmitBtn.addClass('disabled');
+            checkAllSubmitBtn.attr('disabled', true);
           }
 
           //console.log(checkAllSubmitBtn);
