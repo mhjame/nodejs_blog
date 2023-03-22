@@ -1,4 +1,4 @@
-<div class="mt-4">
+<form name = "container-form"class="mt-4" method = "POST" action ="/courses/handle-form-actions">
   <div>
     <h3> Khóa học của tôi </h3>
     <!--{{#if deletedCount}} -->
@@ -15,15 +15,15 @@
         </div>
     
 
-        <select class="form-control form-control-sm checkbox-select-all-options" id="exampleFormControlSelect1">
-          <option> -- Chọn hành động -- </option>
+        <select class="form-control form-control-sm checkbox-select-all-options" id="exampleFormControlSelect1" name = "action" required>
+          <option value = ""> -- Chọn hành động -- </option>
           <option value = "delete"> Xóa </option>
           <option>3</option>
           <option>4</option>
           <option>5</option>
         </select>
 
-        <button class="btn btn-primary btn-sm disabled">
+        <button class="btn btn-primary btn-sm disabled check-all-submit-btn">
           Thực hiện
         </button>
     </div>
@@ -67,7 +67,7 @@
             {{/each}}
         </tbody>
     </table>
-</div>
+</form>
 
 <!-- Confirm delete course 
 -->
@@ -109,7 +109,11 @@
         var btnDeleteCourse = document.getElementById('btn-delete-course');
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name = "courseIds[]"]');
-
+        var checkAllSubmitBtn = $('.check-all-submit-btn');
+        var containerForm = document.forms['container-form'];
+        
+        //console.log(containerForm);
+        
         $('#delete-course-modal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // Button that triggered the modal
             var id = button.data('id'); // Extract info from data-* attributes
@@ -145,6 +149,40 @@
           var isCheckedAll_ = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length;
           checkboxAll.prop('checked', isCheckedAll_);
         });
+
+        //checkAllSubmitBtn clicked
+        /*
+        checkAllSubmitBtn.click(function(e) {
+          e.preventDefault();
+
+          var isSubmittable = !$(this).hasClass('disabled');
+          if(isSubmittable) {
+            containerForm.submit();
+          }
+
+        })*/
+
+        /*viết để có bắt buộc hành động*/
+
+        checkAllSubmitBtn.on('submit', function(e) { // lắng nghe hành vi submit mặc định của trình duyệt. Nếu submit
+          var isSubmittable = !$(this).hasClass('disabled');
+          if(!isSubmittable) {
+            e.preventDefault();
+          }
+        })
+
+        // rerender check all submit button
+        courseItemCheckbox.change(function(){
+          var checkedCount = $('input[name="courseIds[]"]:checked').length;
+          if(checkedCount) {
+              checkAllSubmitBtn.removeClass('disabled');
+          }
+          else {
+            checkAllSubmitBtn.addClass('disabled');
+          }
+
+          //console.log(checkAllSubmitBtn);
+        }) 
     });
     
 </script>
